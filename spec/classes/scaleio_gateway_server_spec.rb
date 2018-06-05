@@ -64,7 +64,7 @@ describe 'scaleio::gateway_server' do
         is_expected.to contain_package('emc-scaleio-gateway').with(
           :ensure   => 'installed',
           :source   => '/tmp/gateway/gateway.deb',
-          :provider => 'dpkg')
+          :parser => 'dpkg')
       end
     end
     it 'sets security bypass' do

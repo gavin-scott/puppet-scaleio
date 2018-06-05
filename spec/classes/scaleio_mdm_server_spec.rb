@@ -47,7 +47,7 @@ describe 'scaleio::mdm_server' do
       is_expected.to contain_package('emc-scaleio-mdm').with(
         :ensure   => 'present',
         :source   => '/tmp/mdm/mdm.deb',
-        :provider => 'dpkg')
+        :parser => 'dpkg')
       end
     end
     it 'runs mdm service' do

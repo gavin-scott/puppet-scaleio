@@ -39,6 +39,6 @@ describe 'scaleio::package' do
     it { is_expected.to contain_package('emc-scaleio-gateway').with(
       :ensure   => 'present',
       :source   => '/tmp/gateway/gateway.deb',
-      :provider => 'dpkg')}
+      :parser => 'dpkg')}
   end
 end

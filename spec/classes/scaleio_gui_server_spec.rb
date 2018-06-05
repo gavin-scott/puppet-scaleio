@@ -62,7 +62,7 @@ describe 'scaleio::gui_server' do
         is_expected.to contain_package('EMC_ScaleIO_GUI').with(
           :ensure   => 'installed',
           :source   => '/tmp/gui/gui.deb',
-          :provider => 'dpkg')
+          :parser => 'dpkg')
       end
     end
   end
