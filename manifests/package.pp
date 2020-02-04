@@ -15,7 +15,8 @@ define scaleio::package (
       'sdc'     => 'EMC-ScaleIO-sdc',
       'sds'     => 'EMC-ScaleIO-sds',
       'xcache'  => 'EMC-ScaleIO-xcache',
-      'lia'     => 'EMC-ScaleIO-lia'
+      'lia'     => 'EMC-ScaleIO-lia',
+      'sdr'     => 'EMC-ScaleIO-sdr'
     },
     'Debian' => $title ? {
       'gateway' => 'emc-scaleio-gateway',
@@ -25,6 +26,7 @@ define scaleio::package (
       'sds'     => 'emc-scaleio-sds',
       'xcache'  => 'emc-scaleio-xcache',
       'lia'     => 'emc-scaleio-lia',
+      'sdr'     => 'EMC-Scaleio-sdr'
     },
     'Suse' => $title ? {
       'gateway' => 'EMC-ScaleIO-gateway',
@@ -33,7 +35,8 @@ define scaleio::package (
       'sdc'     => 'EMC-ScaleIO-sdc',
       'sds'     => 'EMC-ScaleIO-sds',
       'xcache'  => 'EMC-ScaleIO-xcache',
-      'lia'     => 'EMC-ScaleIO-lia'
+      'lia'     => 'EMC-ScaleIO-lia',
+      'sdr'     => 'EMC-ScaleIO-sdr'
     },
   }
 

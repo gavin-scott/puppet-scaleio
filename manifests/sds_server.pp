@@ -5,6 +5,7 @@ define scaleio::sds_server (
   $ensure  = 'present',  # present|absent - Install or remove SDS service
   $xcache  = 'present',  # present|absent - Install or remove XCache service
   $lia     = 'present',  # present|absent - Install or remove lia service
+  $sdr     = 'absent',  # present|absent - Install or remove sdr service
   $ftp     = 'default',  # string - 'default' or FTP with user and password for driver_sync
   $pkg_ftp = undef,      # string - URL where packages are placed (for example: ftp://ftp.emc.com/Ubuntu/2.0.10000.2072)
   $pkg_path = undef,
@@ -47,6 +48,23 @@ define scaleio::sds_server (
     pkg_ftp => $pkg_ftp,
     pkg_path => $pkg_path,
     require => Scaleio::Common_server['install common packages for SDS']
+  }
+
+  if $sdr == 'present' {
+    scaleio::package { 'sdr':
+      ensure  => $ensure,
+      pkg_ftp => $pkg_ftp,
+      pkg_path => $pkg_path,
+      require   => Scaleio::Package['sds']
+    }
+
+    service { 'sdr':
+      ensure    => 'running',
+      enable    => true,
+      hasstatus => true,
+      require   => Scaleio::Package['sdr'],
+      provider  => $provider
+    }
   }
 
   if $xcache == 'present' {
