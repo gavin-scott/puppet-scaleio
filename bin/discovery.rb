@@ -74,6 +74,7 @@ def collect_scaleio_facts
   end
 
   scaleio_system = scaleio_systems[0]
+  include_sdrs = scaleio_system["links"].find{ |link| link["href"].include?("Sdr")}
 
   facts[:general] = scaleio_system
   facts[:general][:name] = facts[:name]
@@ -87,6 +88,8 @@ def collect_scaleio_facts
           :sds_list => protection_domain_sdslist(protection_domain),
           :acceleration_pool => accel_pool_info,
           :acceleration_pool_devices => acceleration_pool_devices(accel_pool_info)}
+
+    pd[:sdr_list] = protection_domain_sdrlist(protection_domain) if include_sdrs
     pd[:storage_pool_list].each do |storage_pool|
       storage_pool[:statistics] = storage_pool_statistics(storage_pool)
       storage_pool[:disk_list] = storage_pool_disks(storage_pool)
@@ -185,6 +188,12 @@ end
 def protection_domain_sdslist(protection_domain)
   sp_url = "/api/instances/ProtectionDomain::%s/relationships/Sds" % [protection_domain["id"]]
   url = transport.get_url(sp_url)
+  transport.post_request(url, {}, "get") || []
+end
+
+def protection_domain_sdrlist(protection_domain)
+  sdr_url = "/api/instances/ProtectionDomain::%s/relationships/Sdr" % [protection_domain["id"]]
+  url = transport.get_url(sdr_url)
   transport.post_request(url, {}, "get") || []
 end
 
