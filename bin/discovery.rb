@@ -53,6 +53,8 @@ def collect_scaleio_facts
   facts = {:protection_domain_list => []}
   facts[:certname] = "scaleio-%s" % [@opts[:server]]
   facts[:name] = vxflexos_hostname
+  facts[:service_tag] = facts[:name]
+  facts[:puppet_certname] = "scaleio-%s" % [facts[:name]]
   facts[:update_time] = Time.now
   facts[:device_type] = "script"
   facts[:scaleio_rpm_version] = "DellEMC ScaleIO Version: R#{scaleio_package_info["version"]}.#{scaleio_package_info["release"]}" if scaleio_package_info
