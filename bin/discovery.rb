@@ -197,6 +197,8 @@ def protection_domain_sdrlist(protection_domain)
   sdr_url = "/api/instances/ProtectionDomain::%s/relationships/Sdr" % [protection_domain["id"]]
   url = transport.get_url(sdr_url)
   transport.post_request(url, {}, "get") || []
+rescue
+  []
 end
 
 def protection_domain_acceleration_pool(protection_domain)
